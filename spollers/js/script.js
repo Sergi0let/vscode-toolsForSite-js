@@ -1,45 +1,37 @@
 'use strict';
 
-//SPOLLERS
+//Spollers №1
 const spollersArray = document.querySelectorAll('[data-spollers]');
 if (spollersArray.length > 0) {
-  // Oтримуємо  ЗВИЧАЙНІ сполери
-  const spollersRegular = Array.from(spollersArray).filter(function (
-    item,
-    index,
-    self
-  ) {
-    return !item.dataset.spollers.split(',')[0];
-  });
+  // Отримуємо звичайні слайдери №3
+  const spollersRegular = Array.from(spollersArray).filter(
+    (item) => !item.dataset.spollers.split(',')[0]
+  );
 
-  // Ініціалізація ЗВИЧАЙНИХ спойлерів
+  //Ініціалізація звичайних слайдерів №4
   if (spollersRegular.length > 0) {
     initSpollers(spollersRegular);
   }
 
-  // Отримуємо спойлери з МЕДІАЗАПРОСАСИ
-  const spollersMedia = Array.from(spollersArray).filter(function (
-    item,
-    index,
-    self
-  ) {
-    return item.dataset.spollers.split(',')[0];
-  });
-  // Ініціалізація спойлерІВ з МЕДІАЗАПРОСАСАМИ
+  // Отримуємо МЕДІА слайдери №5
+  const spollersMedia = Array.from(spollersArray).filter(
+    (item) => item.dataset.spollers.split(',')[0]
+  );
+
+  //Ініціалізація МЕДІА слайдерів №6
   if (spollersMedia.length > 0) {
-    const breakpointsArray = [];
+    const breakpointsArray = []; // в який запушив обєкт
     spollersMedia.forEach((item) => {
-      const params = item.dataset.spollers;
-      const breakpoint = {};
-      const paramsArray = params.split(',');
-      // Заповнюємо обєкт (ширина, тип, селектор)
+      const params = item.dataset.spollers; // записуємо параметри ("800,max" )
+      const breakpoint = {}; // для наповнення
+      const paramsArray = params.split(','); // із params створюємо масив ['800', 'max']
       breakpoint.value = paramsArray[0];
       breakpoint.type = paramsArray[1] ? paramsArray[1].trim() : 'max';
       breakpoint.item = item;
       breakpointsArray.push(breakpoint);
     });
 
-    // Отримуємо уникальні брейкпоїнти
+    // Отримуємо унікальні брейкпоінти № 7
     let mediaQueries = breakpointsArray.map(function (item) {
       return (
         '(' +
@@ -51,39 +43,41 @@ if (spollersArray.length > 0) {
         ',' +
         item.type
       );
-    });
-    mediaQueries = mediaQueries.filter(function (item, index, self) {
-      return self.indexOf(item) === index;
-    });
+    }); // ['(min-width: 650px), 650 , min', '(max-width: 800px), 800 , max']
 
-    // Працюємо з кожним брейкпоінтом
-    mediaQueries.forEach((breakpoint) => {
-      const paramsArray = breakpoint.split(',');
-      const mediaBreakpoint = paramsArray[1];
-      const mediaType = paramsArray[2];
-      const matchMedia = window.matchMedia(paramsArray[0]);
+    mediaQueries = mediaQueries.filter(
+      (item, index, self) => self.indexOf(item) === index
+    ); // отримуємо унікальні елементи
 
-      // Обєкти з потрібнити умовами
+    // Пробігаємося по кожному брейкпоінту № 8
+    mediaQueries.forEach((breapoint) => {
+      const paramsArray = breapoint.split(','); //['(min-width: 650px)', ' 650 ', ' min']
+      const mediaBreakpoint = paramsArray[1]; //  650
+      const mediaType = paramsArray[2]; //  min
+      const matchMedia = window.matchMedia(paramsArray[0]); // MediaQueryList {media: '(min-width: 650px)', matches: true, onchange: null}
+
+      // Збираємо масив обєктів який відповідає даному брейкпоінту №9
       const spollersArray = breakpointsArray.filter(function (item) {
         if (item.value === mediaBreakpoint && item.type === mediaType) {
           return true;
         }
       });
-      // Подія.
+
+      // Собитія №10
       matchMedia.addListener(function () {
         initSpollers(spollersArray, matchMedia);
       });
-      initSpollers(spollersArray, matchMedia);
+      initSpollers(spollersArray, matchMedia); // запускаємо функцію
     });
   }
 
-  // Ініціалізація
+  // Ініціалізація функції initSpollers() № 11
   function initSpollers(spollersArray, matchMedia = false) {
     spollersArray.forEach((spollersBlock) => {
       spollersBlock = matchMedia ? spollersBlock.item : spollersBlock;
       if (matchMedia.matches || !matchMedia) {
-        spollersBlock.classList.add = '_init';
-        initSpollerBody(spollersBlock);
+        spollersBlock.classList.add('_init'); // усій оболочці присвоюємо клас _init до якої навішуются усі CSS класи для спойлера
+        initSpollerBody(spollersBlock); // для роботи з контентною частиною спойлера
         spollersBlock.addEventListener('click', setSpollerAction);
       } else {
         spollersBlock.classList.remove('_init');
@@ -93,7 +87,7 @@ if (spollersArray.length > 0) {
     });
   }
 
-  // Робота з контентом
+  // Робота з контентом initSpollerBody() № 12
   function initSpollerBody(spollersBlock, hideSpollerBody = true) {
     const spollerTitles = spollersBlock.querySelectorAll('[data-spoller]');
     if (spollerTitles.length > 0) {
@@ -140,6 +134,32 @@ if (spollersArray.length > 0) {
     }
   }
 }
+
+/*
+1. Отримуємо колекцію усіх спойлерів spollersArray з атрибутом [data-spollers].
+2. Нам потрібно буде колекцію spollersArray поділити на масиви які не мають Медіа запросів і які мають.
+3. Створюємо spollersRegular (звичайні слайдери), фільтруємо колекцію і забераємо елементи у яких немає параметрів в data-spollers.
+4. Ініціалізація слайдерів initSpollers(), перед тим провірка  if (spollersRegular.length > 0) 
+5. Створюємо spollersMedia() (МЕДІА слайдери), фільтруємо колекцію і забераємо елементи у яких немає параметрів в data-spollers="800,max"
+6. Ініціалізація слайдерів spollersMedia(), перед тим провірка  if (spollersMedia.length > 0) 
+7. Отримуємо унікальні брейкпоінти
+8. Пробігаємося по кожному брейкпоінту 
+9. Збираємо масив обєктів який відповідає даному брейкпоінту
+10. Собитія яке буде працювати при досягненню умов брейкпоінту
+11. Ініціалізація функції initSpollers()
+12.  Робота з контентом initSpollerBody()
+*/
+/*
+Для родителя слойлеров пишем атрибут data-spollers
+Для заголовков слойлеров пишем атрибут data-spoller
+Если нужно включать\выключать работу спойлеров на разных размерах экранов
+пишем параметры ширины и типа брейкпоинта.
+Например:
+data-spollers="992,max" - спойлеры будут работать только на экранах меньше или равно 992px
+data-spollers="768,min" - спойлеры будут работать только на экранах больше или равно 768px
+
+Если нужно что бы в блоке открывался болько один слойлер добавляем атрибут data-one-spoller
+*/
 //========================================================================================================================================================
 //SlideToggle
 let _slideUp = (target, duration = 500) => {
@@ -208,14 +228,3 @@ let _slideToggle = (target, duration = 500) => {
 };
 
 //========================================================================================================================================================
-/*
-Для родителя слойлеров пишем атрибут data-spollers
-Для заголовков слойлеров пишем атрибут data-spoller
-Если нужно включать\выключать работу спойлеров на разных размерах экранов
-пишем параметры ширины и типа брейкпоинта.
-Например:
-data-spollers="992,max" - спойлеры будут работать только на экранах меньше или равно 992px
-data-spollers="768,min" - спойлеры будут работать только на экранах больше или равно 768px
-
-Если нужно что бы в блоке открывался болько один слойлер добавляем атрибут data-one-spoller
-*/
