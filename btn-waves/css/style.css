@@ -31,7 +31,7 @@ body {
 }
 
 .wave-btn {
-  background-color: #4973ff;
+  background-color: #ff0000;
   text-decoration: none;
   width: 280px;
   height: 60px;
@@ -45,7 +45,7 @@ body {
 .wave-btn:hover {
   border-radius: 10px;
   transition: all 0.8s ease 0.2s;
-  box-shadow: 0 0 40px rgba(73, 115, 255, 0.6);
+  box-shadow: 0 0 40px rgba(255, 0, 0, 0.5803921569);
 }
 .wave-btn:hover .wave-btn__waves {
   top: -50px;
