@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Style form, checkbox, radiobutton</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="wrapper">
+      <form action="#" class="form-block">
+        <h2 class="form-block__title">Стилі елементів</h2>
+        <div class="form-block__input">
+          <div class="checkbox">
+            Вмикач №1
+            <input type="checkbox" checked name="namecheckbox_1" />
+          </div>
+        </div>
+        <div class="form-block__input">
+          <div class="checkbox">
+            Вмикач №2
+            <input type="checkbox" name="namecheckbox_2" />
+          </div>
+        </div>
+        <div class="form-block__input">
+          <div class="radiobuttons">
+            <div class="radiobuttons__buttons">
+              <div class="radiobuttons__item">
+                Варіант №1
+                <input type="radio" value="1" name="nameradio" />
+              </div>
+              <div class="radiobuttons__item">
+                Варіант №2
+                <input type="radio" value="2" name="nameradio" />
+              </div>
+              <div class="radiobuttons__item">
+                Варіант №3
+                <input type="radio" value="3" name="nameradio" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="button" type="submit">Відправити форму</button>
+      </form>
+    </div>
+    <script src="js/script.js"></script>
+  </body>
+</html>
