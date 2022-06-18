@@ -17,7 +17,7 @@ body {
 }
 
 .content {
-  max-width: 70%;
+  max-width: 1000px;
   margin: 0 auto;
   padding: 10% 0;
 }
@@ -27,6 +27,22 @@ body {
 }
 .tabs__menu {
   display: flex;
+}
+.tabs__menu span {
+  position: relative;
+  z-index: 1;
+}
+@media (max-width: 767px) {
+  .tabs__menu span {
+    display: block;
+    width: 100px;
+    font-size: 14px;
+    white-space: nowrap;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0px 5px;
+  }
 }
 .tabs__item {
   flex: 0 1 33.333%;
@@ -39,6 +55,7 @@ body {
   color: #fff;
 }
 .tabs__block {
+  position: relative;
   padding: 20px;
   font-size: 18px;
   line-height: 24px;
@@ -55,6 +72,25 @@ body {
 }
 .tabs__block:nth-child(3) {
   background-color: rgba(185, 112, 233, 0.568627451);
+}
+.tabs__block::before {
+  content: "";
+  width: 33.333%;
+  height: 50px;
+  position: absolute;
+  top: -50px;
+}
+.tabs__block:nth-child(1)::before {
+  background-color: rgba(136, 255, 89, 0.568627451);
+  left: 0;
+}
+.tabs__block:nth-child(2)::before {
+  background-color: rgba(185, 135, 28, 0.568627451);
+  left: 33.333%;
+}
+.tabs__block:nth-child(3)::before {
+  background-color: rgba(185, 112, 233, 0.568627451);
+  right: 0;
 }
 
 /*# sourceMappingURL=style.css.map */
