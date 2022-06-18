@@ -1,17 +1,24 @@
 // CHECKBOX
 
-const checkboxs = document.querySelectorAll('[type="checkbox"]');
+const checkboxs = document.querySelectorAll('.checkbox');
 
 for (const check of checkboxs) {
   const checkButton = check;
-  const parentElement = checkButton.parentElement;
-  console.log(parentElement);
+  const checkElement = check.firstElementChild;
 
-  if (checkButton.hasAttribute('checked')) {
-    parentElement.classList.add('activeBox');
+  if (checkElement.hasAttribute('checked')) {
+    checkButton.classList.add('activeBox');
   }
   checkButton.addEventListener('click', () => {
-    parentElement.classList.toggle('activeBox');
+    checkButton.classList.toggle('activeBox');
   });
 }
-console.log(checkboxs);
+const radioButtons = document.querySelectorAll('input[type="radio"]');
+for (let radio of radioButtons) {
+  const parentRadio = radio.parentElement;
+  radio.addEventListener('click', function () {
+    if (radio.checked) {
+      parentRadio.classList.toggle('activeRadio');
+    }
+  });
+}

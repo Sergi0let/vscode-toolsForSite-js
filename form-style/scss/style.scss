@@ -33,8 +33,51 @@ body {
   display: none;
 }
 .checkbox {
-  transition: all 0.3s ease 0s;
-  f
+  font-size: 16px;
+  color: #b2b2b2;
+
+  line-height: 20px;
+  padding-left: 70px;
+  cursor: pointer;
+  position: relative;
+
+  &::before {
+    transition: all 0.3s ease 0s;
+
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 50px;
+    height: 20px;
+    background: #bfc0c4;
+    box-shadow: 0 0 3px #c4bfbfc2;
+    border-radius: 20px;
+  }
+
+  &::after {
+    transition: all 0.3s ease 0s;
+
+    content: '';
+    position: absolute;
+    left: 0;
+    top: -5px;
+    width: 30px;
+    height: 30px;
+    box-shadow: 0 0 3px #c4bfbfc2;
+    background: #bfc0c4;
+    border-radius: 50%;
+  }
+  &.activeBox {
+    color: #000;
+  }
+  &.activeBox::before {
+    background-color: #4fbb65;
+  }
+  &.activeBox::after {
+    background-color: #4fbb65;
+    left: 25px;
+  }
 }
 .radiobuttons {
   // .radiobuttons__buttons
@@ -45,7 +88,87 @@ body {
   // .radiobuttons__item
 
   &__item {
+    position: relative;
+    padding-left: 45px;
+    font-size: 18px;
+    line-height: 30px;
+    color: #b2b2b2;
+    margin-bottom: 20px;
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    input {
+      // display: none;
+    }
+
+    &::before {
+      content: '';
+      background-color: #bfc0c4;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      box-shadow: 0 0 3px #c4bfbfc2;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 5px;
+      left: 5px;
+      background-color: #4fbb65;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      transition: all 0.3s ease 0s;
+      transform: scale(0);
+    }
+
+    &.activeRadio {
+      color: #000;
+    }
+    &.activeRadio::after {
+      transform: scale(1);
+    }
   }
 }
 .button {
+  line-height: 60px;
+  display: inline-block;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 8px;
+  padding: 0px 30px;
+  font-size: 18px;
+  border-radius: 25px;
+  background-color: #bfc0c4;
+  border: none;
+  position: relative;
+  transition: all 0.3s ease 0s;
+  overflow: hidden;
+
+  & span {
+    position: relative;
+    z-index: 1;
+  }
+  &::before {
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #4fbb65;
+    transform: scale(0);
+    transition: all 0.6s ease 0s;
+  }
+
+  &:hover {
+    color: #fff;
+  }
+
+  &:hover::before {
+    transform: scale(1);
+  }
 }
