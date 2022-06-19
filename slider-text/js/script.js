@@ -53,6 +53,7 @@ function initSimpleSliderTwo(content, selector) {
   window.setInterval(function () {
     elem.innerHTML = content[count];
     count++;
+
     if (count === content.length) count = 0;
   }, 1000);
 }
