@@ -47,13 +47,11 @@ function initSimpleSliderTwo(content, selector) {
   const parent = document.querySelector(selector);
   const elem = parent.querySelector('.slider__content');
   let count = 0;
-
   elem.innerHTML = content[count];
 
   window.setInterval(function () {
     elem.innerHTML = content[count];
     count++;
-
     if (count === content.length) count = 0;
   }, 1000);
 }
