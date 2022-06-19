@@ -31,6 +31,9 @@ body {
 .page__section:nth-child(1) {
   background-color: #3d8546;
 }
+.page__section:nth-child(2) {
+  background-color: #977676;
+}
 .page__container {
   max-width: 1070px;
   margin: 0 auto;
